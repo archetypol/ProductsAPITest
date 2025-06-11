@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Products API",
+      "request": "launch",
+      "type":"coreclr",
+      //in .vscode/tasks.json
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/ProductsApi/bin/Debug/net9.0/ProductsApi.dll",
+      "cwd": "${workspaceFolder}/ProductsApi/bin/Debug/net9.0",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://0.0.0.0:80"
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+}

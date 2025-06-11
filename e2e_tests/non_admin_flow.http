@@ -1,0 +1,36 @@
+POST http://productsapi:80/auth/register
+Content-Type: application/json
+
+{
+  "Email": "foo@bar.co.uk",
+  "Password": "Blueeee1!",
+  "IsAdmin": false
+}
+###
+
+# @name login
+POST http://productsapi:80/auth/login
+Content-Type: application/json
+
+{
+  "Email": "foo@bar.co.uk",
+  "Password": "Blueeee1!"
+}
+
+###
+@authToken = {{login.response.body.token}}
+
+###
+POST http://productsapi:80/products
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "name": "Apple",
+  "colour": "Blue"
+}
+
+###
+GET  http://productsapi:80/products
+Content-Type: application/json
+Authorization: Bearer {{authToken}}

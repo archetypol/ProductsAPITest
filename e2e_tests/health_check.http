@@ -1,0 +1,4 @@
+
+GET  http://productsapi:80/health
+Content-Type: application/json
+

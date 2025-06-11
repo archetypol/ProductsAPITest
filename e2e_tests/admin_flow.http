@@ -1,0 +1,53 @@
+POST http://productsapi:80/auth/register
+Content-Type: application/json
+
+{
+  "Email": "product@jahendry.co.uk",
+  "Password": "Blueeee1!",
+  "IsAdmin": true
+}
+###
+
+# @name login
+POST http://productsapi:80/auth/login
+Content-Type: application/json
+
+{
+  "Email": "product@jahendry.co.uk",
+  "Password": "Blueeee1!"
+}
+
+###
+@authToken = {{login.response.body.token}}
+
+###
+POST http://productsapi:80/products
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "Name": "Pear",
+  "Colour": "Blue",
+  "CurrentStock":2
+}
+
+###
+POST http://productsapi:80/products
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "Name": "Pear",
+  "Colour": "Green",
+  "CurrentStock":2
+}
+
+###
+GET  http://productsapi:80/products
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+GET  http://productsapi:80/products?colour=Blue
+Content-Type: application/json
+Authorization: Bearer {{authToken}}

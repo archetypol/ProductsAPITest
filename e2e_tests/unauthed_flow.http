@@ -1,0 +1,13 @@
+###
+POST http://productsapi:80/products
+Content-Type: application/json
+
+{
+  "Name": "Pear",
+  "Colour": "Green",
+  "CurrentStock":2
+}
+
+###
+GET  http://productsapi:80/products?colour=Blue
+Content-Type: application/json

@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=LocalDev!
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+  productsapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dotnet9-webapi
+    container_name: productsapi
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MyDatabase;User Id=sa;Password=LocalDev!;TrustServerCertificate=True;
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    command: >
+      bash -c " \
+        dotnet restore ./ && \
+        dotnet run --urls http://0.0.0.0 \
+      "
+
+volumes:
+  sqlserver-data:
