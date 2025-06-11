@@ -7,7 +7,8 @@
   "workspaceFolder": "/workspace",
   "forwardPorts": [8000],
   "overrideCommand": true,
-  "postAttachCommand": "dotnet build",
+  "postCreateCommand": "chmod +x ./.devcontainer/postAttach.sh",
+  "postAttachCommand": "./.devcontainer/postAttach.sh",
   "customizations": {
     "vscode": {
       "extensions": [
